@@ -1,0 +1,53 @@
+		if((HWND)lParam == hButReplace)
+		{
+			SendMessage(hEditRegEx, WM_GETTEXT, (WPARAM)256, (LPARAM)str2);
+			re = str2;
+			count = SendMessage(hListText, LB_GETCOUNT, 0, 0);
+			for (int i = 0; i < count; i++)
+			{
+				SendMessage(hListText, LB_GETTEXT, (WPARAM)i, (LPARAM)str);
+				if(regex_search(str, re))
+				{
+					SendMessage(hEditReplace, WM_GETTEXT, (WPARAM)256, (LPARAM)str3);
+					s = regex_replace(str, re, str3);
+					SendMessage(hListText, LB_ADDSTRING, (WPARAM)i, (LPARAM)s.c_str());
+				}
+			}
+		}
+
+
+
+
+
+
+
+if((HWND)lParam == hButReplace)
+		{
+			SendMessage(hEditRegEx, WM_GETTEXT, (WPARAM)256, (LPARAM)str2);
+			re = str2;
+			count = SendMessage(hListText, LB_GETCOUNT, 0, 0);
+			for (int i = 0; i < count; i++)
+			{
+				SendMessage(hListText, LB_GETTEXT, (WPARAM)i, (LPARAM)str);
+				if(regex_search(str, re))
+				{
+					SendMessage(hEditReplace, WM_GETTEXT, (WPARAM)256, (LPARAM)str3);
+					s = regex_replace(str, re, str3);
+					SendMessage(hListText, LB_ADDSTRING, (WPARAM)0, (LPARAM)s.c_str());
+					SendMessage(hListText, LB_DELETESTRING, (WPARAM)i, (LPARAM)0);
+					i--;
+				}
+				else
+				{
+					SendMessage(hListText, LB_ADDSTRING, (WPARAM)0, (LPARAM)str);
+					SendMessage(hListText, LB_DELETESTRING, (WPARAM)i, (LPARAM)0);
+				}
+			}
+			//count = SendMessage(hListText, LB_GETCOUNT, 0, 0);
+			//for (int i = 0; i < count; i++)
+			//{
+			//	SendMessage(hListText, LB_GETTEXT, (WPARAM)i, (LPARAM)str);
+			//	//SendMessage(hListText, LB_ADDSTRING, (WPARAM)0, (LPARAM)str);
+			//	SendMessage(hListText, LB_DELETESTRING, (WPARAM)i, (LPARAM)0);
+			//}
+		}
