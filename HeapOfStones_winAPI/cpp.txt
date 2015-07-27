@@ -1,0 +1,379 @@
+//#include "StdAfx.h"
+//
+//bool Heaps::goldHit = false;	// нашли ли мы куда лучше переложить камень
+//double Heaps::bestDiff = 0.0;	// разница между первой и второй кучей
+//double Heaps::halfWeight = 0.0;	// половина общего веса
+//vector<double> Heaps::bestFirstHeap = vector<double>();	// готовая первая куча
+//vector<double> Heaps::bestSecondHeap = vector<double>();	// готовая вторая куча
+// 
+//Heaps::Heaps(double * stoneArray, int arrSize)
+//{
+//    sort(stoneArray, stoneArray + arrSize);	// сортируем массив в порядке возрастания
+//    halfWeight = accumulate(stoneArray, stoneArray + arrSize, 0.0) / 2.0;	// расчитываем общий вес и делим пополам
+//    restHeapPtr = new vector<double>(stoneArray, stoneArray + arrSize);
+//    firstHeapPtr = new vector<double>();
+//    secondHeapPtr = new vector<double>();
+//    secondHeapPtr->push_back(restHeapPtr->back());	// в вектор второй кучи добавляем камень с максимальным весом
+//    restHeapPtr->pop_back();	// из общей кучи удаляем последний камень (который перенесли во вторую кучу)
+//    bestFirstHeap = *restHeapPtr;	// готовая первая куча указывает на общую кучу
+//    bestSecondHeap = *secondHeapPtr;	// готовая вторая куча указывает на вторую кучу
+//    if (bestSecondHeap.back() == halfWeight)	// если один камень (максимальный по весу) == половине общего веса
+//        goldHit = true;
+//    else
+//    {
+//		// bestDiff = вес первой кучи - вес второй кучи
+//        bestDiff = fabs(accumulate(bestFirstHeap.begin(), bestFirstHeap.end(), 0.0) - accumulate(bestSecondHeap.begin(), bestSecondHeap.end(), 0.0));
+//        initiate();
+//    }
+//}
+// 
+//
+//Heaps::Heaps(vector<double> * rest, vector<double> * first, vector<double> * second)
+//{
+//    restHeapPtr = new vector<double>(*rest);
+//    firstHeapPtr = new vector<double>(*first);
+//    secondHeapPtr = new vector<double>(*second);
+//}
+// 
+//
+//Heaps::~Heaps()
+//{
+//    delete secondHeapPtr;
+//    delete firstHeapPtr;
+//    delete restHeapPtr;
+//}
+// 
+//
+// 
+//void Heaps::initiate()
+//{
+//    if (restHeapPtr->size() > 3)	// если размер первой кучи больше чем 3
+//        firstPart();
+//    else
+//        secondPart();
+//}
+//
+//
+//void Heaps::firstPart()
+//{
+//    if (goldHit)
+//        return;
+//    bool heapsStateChanged = true;	// общие изменения
+//    bool firstHeapChanged = false;	// изменения в первой куче
+//    bool secondHeapChanged = false;	// изменения во второй куче
+//    double weight1 = accumulate(firstHeapPtr->begin(), firstHeapPtr->end(), 0.0);	// вес первой кучи   
+//    double weight2 = accumulate(secondHeapPtr->begin(), secondHeapPtr->end(), 0.0);	// вес второй кучи
+//    vector<double>::const_iterator pos;	// итератор для передвижения по общей куче
+//    do
+//    {
+//        for (pos = restHeapPtr->cbegin(); pos != restHeapPtr->cend(); ++pos)
+//        {
+//            if (*pos + weight2 == halfWeight)	// если текущий камень добавить ко второй куче и получится половина веса общей кучи
+//            {
+//                goldHit = true;
+//                secondHeapPtr->push_back(*pos);
+//                restHeapPtr->erase(pos);
+//                copy(restHeapPtr->cbegin(), restHeapPtr->cend(), back_inserter(*firstHeapPtr));		// копируем в первую кучу все камни из общей кучи
+//                bestFirstHeap = *firstHeapPtr;	// готовая первая куча указывает на только что сформированную первую кучу
+//                bestSecondHeap = *secondHeapPtr;
+//                bestDiff = 0;
+//                delete this;
+//                return;
+//            }
+//            else if (*pos + weight2 > halfWeight)	// если текущий камень добавить к второй куче и он будет больше половины веса общей кучи, то выходим из цикла
+//                break;
+//        }
+//        if (pos != restHeapPtr->cend() && ++pos != restHeapPtr->cend())	// если этот и следующий камни не последние
+//        {
+//            copy(pos, restHeapPtr->cend(), back_inserter(*secondHeapPtr));	// то начиная с этого камня и до последнего копируе во вторую кучу
+//            restHeapPtr->erase(pos, restHeapPtr->cend());	// удаляем эти камни из основной кучи
+//            firstHeapChanged = true;	// произошли изменения
+//            if (restHeapPtr->size() <= 3)	// если в оставшейся куче меньше чем 3 камня включительно
+//            {
+//                while (restHeapPtr->size() != 3)	// пока в общей куче не станет больше чем 3 камня
+//                {
+//                    restHeapPtr->push_back(secondHeapPtr->back());	// в общую кучу кидаем камни из второй кучи
+//                    secondHeapPtr->pop_back(); 
+//                }
+//                secondPart();	// вызываем метод для 3х камней, оставшихся в куче
+//                return;
+//            }
+//        }
+//        else
+//            firstHeapChanged = false;
+//        for (pos = restHeapPtr->cbegin(); pos != restHeapPtr->cend(); ++pos)
+//        {
+//            if (*pos + weight1 == halfWeight)	// если текущий камень добавить к первой куче и вес будет равен половине общего веса
+//            {
+//                goldHit = true;
+//                firstHeapPtr->push_back(*pos);	// перекидываем из общей кучи этот камень в первую кучу
+//                restHeapPtr->erase(pos);
+//                copy(restHeapPtr->cbegin(), restHeapPtr->cend(), back_inserter(*secondHeapPtr));	// остальные добавляем во вторую кучу
+//                bestFirstHeap = *firstHeapPtr;
+//                bestSecondHeap = *secondHeapPtr;
+//                bestDiff = 0.0;
+//                delete this;
+//                return;
+//            }
+//            else if (*pos + weight1 > halfWeight)	// если этот камень добавить к первой куче и вес будет больше чем половина общего веса
+//                break;
+//        }
+//        if (pos != restHeapPtr->cend() && ++pos != restHeapPtr->cend())	// если этот и следующий камни не последние в общей куче
+//        {
+//            copy(pos, restHeapPtr->cend(), back_inserter(*firstHeapPtr));	// кидаем оставшиеся камни в первую кучу
+//            restHeapPtr->erase(pos, restHeapPtr->cend());
+//            secondHeapChanged = true;	// произошли изменения
+//            if (restHeapPtr->size() <= 3)	// если в общей куче осталось меньше чем 3 камня
+//            {
+//                while (restHeapPtr->size() != 3)
+//                {
+//                    restHeapPtr->push_back(firstHeapPtr->back());	// кидаем из первой кучи их обратно в общую
+//                    firstHeapPtr->pop_back();
+//                }
+//                secondPart();	// вызываем метод для 3х камней
+//                return;
+//            }
+//        }
+//        else
+//            secondHeapChanged = false;
+//        heapsStateChanged = firstHeapChanged || secondHeapChanged;
+//        firstHeapChanged = false;
+//        secondHeapChanged = false;
+//    }while (heapsStateChanged);
+// 
+//    
+//    double tempDouble = restHeapPtr->back();	// инициализируем последним камнем в общей куче
+//    restHeapPtr->pop_back();	// кидаем этот камень
+//    secondHeapPtr->push_back(tempDouble);	// во вторую кучу
+//    Heaps * tempHeaps1 = new Heaps(restHeapPtr, firstHeapPtr, secondHeapPtr);
+//    secondHeapPtr->pop_back();	// и кидаем в первую кучу
+//    firstHeapPtr->push_back(tempDouble);
+//    Heaps * tempHeaps2 = new Heaps(restHeapPtr, firstHeapPtr, secondHeapPtr);
+//    tempHeaps1->initiate();
+//    if (goldHit)
+//        return;
+//    else
+//        tempHeaps2->initiate();
+//    delete this;
+//}
+// 
+//void Heaps::secondPart()
+//{
+//    if (goldHit)	// если вес второй кучи == половине общего веса, то выходим из метода
+//        return;
+//    double thisDiff, tempDiff;	// для расчёта рентабельности переноса камня из общей кучи в другую
+//    int bestCase;		// сохраняем лучшее решение для того, чтобы перекинуть камень из общей кучи в другую
+//    double weight1 = accumulate(firstHeapPtr->begin(), firstHeapPtr->end(), 0.0);	// общий вес первой кучи
+//    double weight2 = accumulate(secondHeapPtr->begin(), secondHeapPtr->end(), 0.0);	// общий вес второй кучи
+//    bestCase = 1;	// первый камень из оставшихся идет в первую кучу
+//	/* Проверяем, какой камень лучше добавить к первой куче, чтобы их разность была как можно меньше: */
+//    thisDiff = fabs(weight1 + restHeapPtr->at(0) - weight2 - restHeapPtr->at(1) - restHeapPtr->at(2));	// если первый камень из оставшейся кучи прибавить к первой куче, а остальные камни прибавить ко второй куче, то
+//    if (thisDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestFirstHeap.push_back(restHeapPtr->at(0));	// к готовой первой куче добавляем первый камень из общей кучи
+//        bestSecondHeap = *secondHeapPtr;
+//        bestSecondHeap.push_back(restHeapPtr->at(1));	// к готовой второй куче добавляем второй и третий камень
+//        bestSecondHeap.push_back(restHeapPtr->at(2));
+//        bestDiff = 0.0;		// разница между первой кучей и второй == 0
+//        delete this;
+//        return;
+//    }
+//    tempDiff = fabs(weight1 + restHeapPtr->at(1) - weight2 - restHeapPtr->at(0) - restHeapPtr->at(2));	// если к первой куче добавить второй камень из общей кучи, а остальные ко второй
+//    if (tempDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestFirstHeap.push_back(restHeapPtr->at(1));	// к готовой первой куче добавляем второй камень из общей кучи
+//        bestSecondHeap = *secondHeapPtr;
+//        bestSecondHeap.push_back(restHeapPtr->at(0));	// к готовой второй куче добавляем первый и третий камень
+//        bestSecondHeap.push_back(restHeapPtr->at(2));
+//        bestDiff = 0.0;		// разница между первой кучей и второй == 0
+//        delete this;
+//        return;
+//    }
+//	// сохраняем результат
+//    else if (tempDiff < thisDiff)
+//    {
+//        thisDiff = tempDiff;
+//        bestCase = 2; //второй камень из оставшихся идет в первую кучу
+//    }
+//	/* ищем дальше, возможно третий камень будет лучше кинуть в первую кучу */
+//    tempDiff = fabs(weight1 + restHeapPtr->at(2) - weight2 - restHeapPtr->at(0) - restHeapPtr->at(1));	// если к первой куче добавить третий камень из общей кучи, а остальные ко второй
+//    if (tempDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestFirstHeap.push_back(restHeapPtr->at(2));	// к готовой первой куче добавляем третий камень
+//        bestSecondHeap = *secondHeapPtr;
+//        bestSecondHeap.push_back(restHeapPtr->at(0));	// к готовой второй куче добавляем первый и второй камень
+//        bestSecondHeap.push_back(restHeapPtr->at(1));
+//        bestDiff = 0.0;
+//        delete this;
+//        return;
+//    }
+//	// сохраняем результат
+//    else if (tempDiff < thisDiff)
+//    {
+//        thisDiff = tempDiff;
+//        bestCase = 3; //третий камень из оставшихся идет в первую кучу
+//    }
+//
+//	/* Теперь перебираем варианты с добавляем камней из общей кучи во вторую готовую кучу, а оставшиеся - в первую */
+//	// если ко второй куче кинуть первый камень из общей кучи, а остальные - во в первую
+//    tempDiff = fabs(weight2 + restHeapPtr->at(0) - weight1 - restHeapPtr->at(1) - restHeapPtr->at(2));
+//    if (tempDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestFirstHeap.push_back(restHeapPtr->at(1));
+//        bestFirstHeap.push_back(restHeapPtr->at(2));
+//        bestSecondHeap = *secondHeapPtr;
+//        bestSecondHeap.push_back(restHeapPtr->at(0));
+//        bestDiff = 0.0;
+//        delete this;
+//        return;
+//    }
+//	// сохраняем результат
+//    else if (tempDiff < thisDiff)
+//    {
+//        thisDiff = tempDiff;
+//        bestCase = 4; //первый камень из оставшихся идет во вторую кучу
+//    }
+//
+//	// если ко второй куче добавить второй камень из обещей кучи, а остальные - в первую
+//    tempDiff = fabs(weight2 + restHeapPtr->at(1) - weight1 - restHeapPtr->at(0) - restHeapPtr->at(2));
+//    if (tempDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestFirstHeap.push_back(restHeapPtr->at(0));
+//        bestFirstHeap.push_back(restHeapPtr->at(2));
+//        bestSecondHeap = *secondHeapPtr;
+//        bestSecondHeap.push_back(restHeapPtr->at(1));
+//        bestDiff = 0.0;
+//        delete this;
+//        return;
+//    }
+//	// сохраняем результат
+//    else if (tempDiff < thisDiff)
+//    {
+//        thisDiff = tempDiff;
+//        bestCase = 5; //второй камень из оставшихся идет во вторую кучу
+//    }
+//
+//	// если во вторую кучу добавить третий камень, а к первой остальные
+//    tempDiff = fabs(weight2 + restHeapPtr->at(2) - weight1 - restHeapPtr->at(0) - restHeapPtr->at(1));
+//    if (tempDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestFirstHeap.push_back(restHeapPtr->at(0));
+//        bestFirstHeap.push_back(restHeapPtr->at(1));
+//        bestSecondHeap = *secondHeapPtr;
+//        bestSecondHeap.push_back(restHeapPtr->at(2));
+//        bestDiff = 0.0;
+//        delete this;
+//        return;
+//    }
+//	// сохраняем результат
+//    else if (tempDiff < thisDiff)
+//    {
+//        thisDiff = tempDiff;
+//        bestCase = 6; //третий камень из оставшихся идет во вторую кучу
+//    }
+//
+//	// если к первой куче добавить все оставшиеся камни
+//    tempDiff = fabs(weight1 + restHeapPtr->at(0) + restHeapPtr->at(1) + restHeapPtr->at(2) - weight2);
+//    if (tempDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestFirstHeap.push_back(restHeapPtr->at(0));
+//        bestFirstHeap.push_back(restHeapPtr->at(1));
+//        bestFirstHeap.push_back(restHeapPtr->at(2));
+//        bestSecondHeap = *secondHeapPtr;
+//        bestDiff = 0.0;
+//        delete this;
+//        return;
+//    }
+//	// сохраняем результат
+//    else if (tempDiff < thisDiff)
+//    {
+//        thisDiff = tempDiff;
+//        bestCase = 7; //все оставшиеся камни попадают в первую кучу
+//    }
+//
+//	// если все камни из оставшейся кучи кинь во вторую готовую кучу
+//    tempDiff = fabs(weight2 + restHeapPtr->at(0) + restHeapPtr->at(1) + restHeapPtr->at(2) - weight1);
+//    if (tempDiff == 0)
+//    {
+//        goldHit = true;
+//        bestFirstHeap = *firstHeapPtr;
+//        bestSecondHeap = *secondHeapPtr;
+//        bestSecondHeap.push_back(restHeapPtr->at(0));
+//        bestSecondHeap.push_back(restHeapPtr->at(1));
+//        bestSecondHeap.push_back(restHeapPtr->at(2));
+//        bestDiff = 0.0;
+//        delete this;
+//        return;
+//    }
+//	// сохраняем результат
+//    else if (tempDiff < thisDiff)
+//    {
+//        thisDiff = tempDiff;
+//        bestCase = 8; //все оставшиеся камни попадают во вторую кучу
+//    }
+//	/* в зависимости от сохранённого результата перекидываем камни в соответствующую кучу */
+//    if (thisDiff < bestDiff)
+//    {
+//        bestFirstHeap = *firstHeapPtr;
+//        bestSecondHeap = *secondHeapPtr;
+//        bestDiff = thisDiff;
+//        switch (bestCase)
+//        {
+//            case 1:
+//                bestFirstHeap.push_back(restHeapPtr->at(0));
+//                bestSecondHeap.push_back(restHeapPtr->at(1));
+//                bestSecondHeap.push_back(restHeapPtr->at(2));
+//                break;
+//            case 2:
+//                bestFirstHeap.push_back(restHeapPtr->at(1));
+//                bestSecondHeap.push_back(restHeapPtr->at(0));
+//                bestSecondHeap.push_back(restHeapPtr->at(2));
+//                break;
+//            case 3:
+//                bestFirstHeap.push_back(restHeapPtr->at(2));
+//                bestSecondHeap.push_back(restHeapPtr->at(0));
+//                bestSecondHeap.push_back(restHeapPtr->at(1));
+//                break;
+//            case 4:
+//                bestFirstHeap.push_back(restHeapPtr->at(1));
+//                bestFirstHeap.push_back(restHeapPtr->at(2));
+//                bestSecondHeap.push_back(restHeapPtr->at(0));
+//                break;
+//            case 5:
+//                bestFirstHeap.push_back(restHeapPtr->at(0));
+//                bestFirstHeap.push_back(restHeapPtr->at(2));
+//                bestSecondHeap.push_back(restHeapPtr->at(1));
+//                break;
+//            case 6:
+//                bestFirstHeap.push_back(restHeapPtr->at(0));
+//                bestFirstHeap.push_back(restHeapPtr->at(1));
+//                bestSecondHeap.push_back(restHeapPtr->at(2));
+//                break;
+//            case 7:
+//                bestFirstHeap.push_back(restHeapPtr->at(0));
+//                bestFirstHeap.push_back(restHeapPtr->at(1));
+//                bestFirstHeap.push_back(restHeapPtr->at(2));
+//                break;
+//            case 8:
+//                bestSecondHeap.push_back(restHeapPtr->at(0));
+//                bestSecondHeap.push_back(restHeapPtr->at(1));
+//                bestSecondHeap.push_back(restHeapPtr->at(2));
+//                break;
+//        }
+//    }
+//    delete this;
+//}

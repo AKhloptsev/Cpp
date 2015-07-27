@@ -1,0 +1,65 @@
+﻿Build started 27.07.2015 7:44:52.
+     1>Project "E:\C++\HeapOfStones winAPI\Sceleton.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp".\Debug\Sceleton.pch" /Fo".\Debug\\" /Fd".\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt StdAfx.cpp
+         StdAfx.cpp
+     1>e:\c++\heapofstones winapi\stdafx.cpp(11): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>e:\c++\heapofstones winapi\stdafx.cpp(82): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(114): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\stdafx.cpp(137): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\stdafx.cpp(138): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\stdafx.cpp(139): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\stdafx.cpp(142): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\stdafx.cpp(143): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\stdafx.cpp(146): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(149): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(152): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(155): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(166): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(169): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(172): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(175): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(216): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(273): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\c++\heapofstones winapi\stdafx.cpp(283): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(285): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(200) : see declaration of 'strtok'
+     1>e:\c++\heapofstones winapi\stdafx.cpp(292): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(200) : see declaration of 'strtok'
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp".\Debug\Sceleton.pch" /Fo".\Debug\\" /Fd".\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Heaps.cpp Sceleton.cpp
+         Sceleton.cpp
+         Heaps.cpp
+     1>e:\c++\heapofstones winapi\heaps.cpp(398): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\c++\heapofstones winapi\heaps.cpp(400): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\heaps.cpp(401): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\heaps.cpp(407): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\c++\heapofstones winapi\heaps.cpp(409): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\heaps.cpp(410): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\heaps.cpp(413): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>e:\c++\heapofstones winapi\heaps.cpp(414): warning C4244: 'return' : conversion from 'double' to 'int', possible loss of data
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.0\bin\x86\rc.exe /D _DEBUG /D _VC80_UPGRADE=0x0600 /l"0x0419" /nologo /fo".\Debug\Sceleton.res" Sceleton.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\Sceleton.exe" /INCREMENTAL /NOLOGO odbc32.lib odbccp32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Debug\Sceleton.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\Sceleton.lib" /MACHINE:X86 /SAFESEH .\Debug\Sceleton.res
+         .\Debug\Heaps.obj
+         .\Debug\Sceleton.obj
+         .\Debug\StdAfx.obj
+     1>Heaps.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+         Sceleton.vcxproj -> E:\C++\HeapOfStones winAPI\.\Debug\Sceleton.exe
+     1>Done Building Project "E:\C++\HeapOfStones winAPI\Sceleton.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.92

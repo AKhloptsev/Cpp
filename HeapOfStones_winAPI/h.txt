@@ -1,0 +1,24 @@
+//#pragma once
+//#include "StdAfx.h"
+//
+//class Heaps
+//{
+//public:
+//    Heaps(double *, int);
+//    ~Heaps();
+//    static void print();
+//private:
+//    Heaps(vector<double> *, vector<double> *, vector<double> *);
+//    static bool goldHit;
+//    static double bestDiff;
+//    static double halfWeight;
+//    static vector<double> bestFirstHeap;
+//    static vector<double> bestSecondHeap;
+//    vector<double> * restHeapPtr;
+//    vector<double> * firstHeapPtr;
+//    vector<double> * secondHeapPtr;
+//    void firstPart();
+//    void secondPart();
+//    void initiate();
+//};
+//
